@@ -1,3 +1,5 @@
+![Ansible role scripts](https://github.com/ggiinnoo/ansible-role-scripts/workflows/Ansible%20role%20scripts/badge.svg?branch=release%2F1.0.x)
+
 Custom scripts
 =========
 
