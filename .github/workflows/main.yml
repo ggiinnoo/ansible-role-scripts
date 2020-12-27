@@ -1,0 +1,35 @@
+---
+name: Ansible role scripts
+
+on:
+  push:
+    branches:
+     -  'release/**'
+
+jobs:
+  build:
+    name: Build for centos
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        centos: ['centos6', 'centos7', 'centos8']
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+        with:
+          fetch-depth: 1
+          path: ansible-role-scripts
+      - name: Set up Python 3.8
+        uses: actions/setup-python@v2
+        with:
+          python-version: 3.8
+      - name: Install dependencies
+        run: |
+          python3 -m pip install --upgrade pip
+          python3 -m pip install yamllint molecule[docker] docker ansible-lint yamllint
+      - name: run Molecule
+        env:
+          DOCKER_IMAGE: ${{ matrix.centos }}
+        run: |
+          cd ansible-role-scripts
+          molecule test

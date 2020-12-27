@@ -1,0 +1,14 @@
+---
+- name: Converge
+  hosts: all
+  become: true
+
+  vars:
+    scripts:
+      - name: hello-world
+        ext: sh
+        source: "{{ playbook_dir }}/scripts/"
+        destination: "/usr/local/bin/"
+
+  roles:
+    - ansible-role-scripts

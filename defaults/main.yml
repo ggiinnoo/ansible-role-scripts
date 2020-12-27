@@ -1,0 +1,4 @@
+---
+
+# Empty var so the script on't fail if not defined
+scripts: []
